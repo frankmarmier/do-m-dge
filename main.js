@@ -24,7 +24,7 @@ character.animationControl(keyState);
 let hit = false;
 const projectilesArray = [];
 let maxObj = 10;
-let projSpeed = 500;
+let projSpeed = 200;
 let projStack = 0;
 let timeElapsed = null;
 
@@ -94,8 +94,14 @@ function levelIncrease() {
     maxObj = 100;
   }
   if (timeElapsed > 60) {
-    maxObj = 110;
-    projSpeed = 200;
+    maxObj = 200;
+  }
+  if (timeElapsed > 70) {
+    maxObj = 300;
+  }
+  if (timeElapsed > 75) {
+    maxObj = 400;
+    projSpeed = 100;
   }
 }
 
