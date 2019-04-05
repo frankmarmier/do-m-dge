@@ -55,14 +55,14 @@ audio {
 .characterRunning {
   height: 55px;
   width: 45px;
-  background: url("./sprites/luffy_sprite.gif");
+  background: url("./sprites/sprite.gif");
   background-position-y: -70px;
   animation: runnin 0.5s steps(4) infinite;
 }
 .characterJumping {
   height: 55px;
   width: 45px;
-  background: url("./sprites/luffy_sprite.gif");
+  background: url("./sprites/sprite.gif");
   grid-column: 3 / 2;
   grid-row: 3 / 4;
   background-position-y: -145px;
@@ -72,7 +72,7 @@ audio {
 .characterIdle {
   height: 55px;
   width: 45px;
-  background: url("./sprites/luffy_sprite.gif");
+  background: url("./sprites/sprite.gif");
   /* position: absolute;
     top: -10px;
     left: 7px; */
