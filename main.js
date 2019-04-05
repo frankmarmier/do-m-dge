@@ -80,27 +80,27 @@ function levelIncrease() {
     maxObj = 40;
   }
   if (timeElapsed > 20) {
-    maxObj = 60;
+    maxObj = 80;
     projSpeed = 500;
   }
   if (timeElapsed > 30) {
-    maxObj = 65;
+    maxObj = 180;
   }
   if (timeElapsed > 40) {
-    maxObj = 90;
+    maxObj = 400;
     projSpeed = 300;
   }
   if (timeElapsed > 50) {
-    maxObj = 100;
+    maxObj = 800;
   }
   if (timeElapsed > 60) {
-    maxObj = 200;
+    maxObj = 900;
   }
   if (timeElapsed > 70) {
-    maxObj = 300;
+    maxObj = 900;
   }
   if (timeElapsed > 75) {
-    maxObj = 400;
+    maxObj = 1000;
     projSpeed = 100;
   }
 }

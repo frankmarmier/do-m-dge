@@ -9,7 +9,7 @@ export class Projectile {
     const element = document.createElement("div");
     element.classList.add("projectile");
     this.domElement = element;
-    let randomX = Math.floor(Math.random() * Math.floor(90));
+    let randomX = Math.floor(Math.random() * Math.floor(99));
     this.position = { x: randomX, y: 1 };
     this.domElement.style.gridRow = `${this.position.y} / span 2 `;
     this.domElement.style.gridColumn = `${this.position.x} / span 2`;
