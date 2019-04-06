@@ -76,33 +76,7 @@ function checkCollision() {
 requestAnimationFrame(checkCollision);
 
 function levelIncrease() {
-  if (timeElapsed > 10) {
-    maxObj = 40;
-  }
-  if (timeElapsed > 20) {
-    maxObj = 80;
-    projSpeed = 500;
-  }
-  if (timeElapsed > 30) {
-    maxObj = 180;
-  }
-  if (timeElapsed > 40) {
-    maxObj = 400;
-    projSpeed = 300;
-  }
-  if (timeElapsed > 50) {
-    maxObj = 800;
-  }
-  if (timeElapsed > 60) {
-    maxObj = 900;
-  }
-  if (timeElapsed > 70) {
-    maxObj = 900;
-  }
-  if (timeElapsed > 75) {
-    maxObj = 1000;
-    projSpeed = 100;
-  }
+  maxObj = timeElapsed ** 4;
 }
 
 function gameLoop() {
@@ -121,9 +95,12 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 requestAnimationFrame(gameLoop);
-
+let time = 0;
 const timeInterval = setInterval(() => {
   timeDisplay.innerHTML = `Time Elapsed: ${timeElapsed++}s`;
+  if (timeElapsed - time > 0) {
+    time++;
+  }
 }, 1000);
 
 function createProjectiles(parentNode) {
@@ -135,7 +112,7 @@ function createProjectiles(parentNode) {
       projStack++;
     }
     console.log(projectilesArray.length);
-  }, projSpeed);
+  }, 100);
 }
 
 /////////////////// TODO : MAYBE SET A REQUEST ANIMATION FRAME HERE INCASE IT GETS BUGGY
