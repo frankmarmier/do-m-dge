@@ -35,7 +35,7 @@ export class Character {
     parentNode.appendChild(this.domElement);
   };
 
-  drawElement = parentNode => {
+  drawElement = () => {
     this.domElement.className = this.currentAnimation;
     this.domElement.style.gridColumn = `${this.currentPosition.x}`;
     this.domElement.style.gridRow = `${this.currentPosition.y}`;

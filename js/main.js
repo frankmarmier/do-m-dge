@@ -2,6 +2,9 @@ import { Character } from "./character.js";
 import { Projectile } from "./projectile.js";
 // import { updateDOM } from "./updateDOM";
 
+// const fireBall = { image: "url", class: "projectile" };
+// const Luffy = { name: "Luffy", class: "character" };
+
 //Event Listener
 const LEFTARROW = 37;
 const RIGHTARROW = 39;
@@ -20,29 +23,51 @@ const defeatDisplay = document.getElementById("defeat");
 //Creating DOM ELements;
 const character = new Character({ x: 2, y: 33 }, characterScene);
 // let hit = false;
-// const projectilesArray = [];
 // let maxObj = 10;
 // let projSpeed = 200;
 // let projStack = 0;
-let timeElapsed = null;
+let start = null;
+let timeElapsed = 0;
+let projectileTimer = null;
+const projectileArray = [];
+let levelIncrease = 4;
+let timeDecrease = 1;
 
 function updateTimer(timestamp) {
-  let time = 0;
-  const timeInterval = setInterval(() => {
+  if (!start) start = timestamp;
+  var progress = timestamp - start;
+  if (progress > 1000) {
     timeDisplay.innerHTML = `Time Elapsed: ${timeElapsed++}s`;
-    if (timeElapsed - time > 0) {
-      time++;
-    }
-  }, 1000);
+    start = null;
+  }
 }
-updateTimer();
+
+function createProjectiles(timestamp) {
+  if (!projectileTimer) projectileTimer = timestamp;
+  var progress = timestamp - projectileTimer;
+  if (progress > 1000 * timeDecrease) {
+    timeDecrease -= 0.1;
+    let projectile = new Projectile("yo", projectilesScene);
+    projectileArray.push(projectile);
+    projectileTimer = null;
+  }
+  // levelIncrease *= 2;
+}
+
+function drawProjectiles(projectiles) {
+  for (let projectile of projectiles)
+    projectile.drawElement(() => {
+      projectile.deleteElement(projectilesScene);
+      projectileArray.splice(projectileArray.indexOf(projectile), 1);
+    });
+}
 
 function gameLoop(timestamp) {
   character.move(keyState);
-  character.drawElement(characterScene);
-  // updateProjectile();
-  // createProjectile();
-  // updateTimer(timestamp);
+  character.drawElement();
+  createProjectiles(timestamp);
+  drawProjectiles(projectileArray);
+  updateTimer(timestamp);
   // updateDOMElements(luffy, projectilesArray);
   requestAnimationFrame(gameLoop);
 }

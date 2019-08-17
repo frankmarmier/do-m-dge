@@ -1,46 +1,46 @@
 import { randomPosition } from "./utils.js";
 
 export class Projectile {
-  constructor(image) {
+  constructor(image, parentNode) {
     this.image = image;
-    this.position = null;
+    this.position = this.setPosition();
     this.domElement = null;
     this.intervalId = null;
-  }
-  createProjectileElement(parentNode) {
-    let randomX = randomPosition(99);
-    this.position = { x: randomX, y: 1 };
+    this.createElement(parentNode);
+    this.applyGravity();
   }
 
-  positionElement = () => {
-    this.domElement.style.gridRow = `${this.position.y} / span 2 `;
-    this.domElement.style.gridColumn = `${this.position.x} / span 2`;
+  setPosition = () => {
+    return {
+      x: randomPosition(99),
+      y: 1
+    };
   };
 
   createElement(parentNode) {
     const element = document.createElement("div");
-    element.classList.add("projectile");
+    element.className = "projectile";
     this.domElement = element;
     parentNode.appendChild(this.domElement);
   }
 
-  getPosition() {
-    return this.position;
-  }
-
-  setPosition(x, y) {
-    this.position = { x, y };
-  }
+  drawElement = callback => {
+    this.domElement.style.gridColumn = `${this.position.x}`;
+    this.domElement.style.gridRow = `${this.position.y}`;
+    if (this.position.y > 50) callback();
+  };
 
   deleteElement = parentNode => {
     parentNode.removeChild(this.domElement);
     delete this;
   };
 
-  applyGravity() {
-    this.intervalId = setInterval(() => {
-      this.position.y = this.position.y + 1;
-      this.domElement.style.gridRow = `${this.position.y} / span 2`;
-    }, 20);
-  }
+  applyGravity = () => {
+    this.position.y++;
+    requestAnimationFrame(this.applyGravity);
+    // this.intervalId = setInterval(() => {
+    //   this.position.y = this.position.y + 1;
+    //   this.domElement.style.gridRow = `${this.position.y} / span 2`;
+    // }, 20);
+  };
 }
